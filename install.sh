@@ -50,7 +50,7 @@ cp -r configs/wallpapers /home/mesch/Pictures/wallpapers
 pacman -S lightdm --noconfirm --needed
 systemctl enable lightdm.service
 
-runuser mesch -c 'yay -S lightdm-mini-greeter'
+runuser mesch -c 'yay -S --noconfirm lightdm-mini-greeter'
 
 cp -r configs/lightdm/ /etc/lightdm/
 
@@ -61,14 +61,14 @@ mkdir -p /home/mesch/.config/i3
 cp -r configs/i3/ /home/mesch/.config/i3/
 
 # Polybar̈́
-runuser -c mesch 'yay -S polybar-git'
+runuser -c mesch 'yay -S --noconfirm polybar-git'
 install -Dm644 /usr/share/doc/polybar/config /home/mesch/.config/polybar/config
 pacman -S ttf-font-awesome --noconfirm --needed
 
 cp -r configs/polybar/ /home/mesch/.config/polybar/
 
 # Betterlockscreen
-runuser mesch -c 'yay -S betterlockscreen'
+runuser mesch -c 'yay -S --noconfirm betterlockscreen'
 runuser mesch -c 'cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc /home/mesch/.config'
 runuser mesch -c 'betterlockscreen -u /home/mesch/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg'
 
@@ -91,14 +91,14 @@ cp -r configs/gtk3 /home/mesch/.config/gtk-3.0/
 pacman -S rofi --noconfirm --needed
 
 # IDE
-runuser mesch -c 'yay -S visual-studio-code-bin'
-runuser mesch -c 'yay -S intellij-idea-community-edition'
+runuser mesch -c 'yay -S --noconfirm visual-studio-code-bin'
+runuser mesch -c 'yay -S --noconfirm jetbrains-toolbox'
 
 # Java
 pacman -S jdk-openjdk
 
 # Messaging
-runuser mesch -c 'yay -S slack-desktop'
+runuser mesch -c 'yay -S --noconfirm slack-desktop'
 
 # Internet
 pacman -S firefox
