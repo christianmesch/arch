@@ -1,5 +1,5 @@
 #!/bin/bash
-pacman -S bash-completion
+pacman -S bash-completion --noconfirm --needed
 
 # Create user
 useradd -m mesch
@@ -25,6 +25,7 @@ git clone https://aur.archlinux.org/yay.git
 chmod -R 777 yay
 cd yay
 runuser mesch -c 'makepkg -si'
+cd /tmp/arch
 
 # npm
 pacman -S npm --noconfirm --needed
@@ -70,6 +71,21 @@ cp -r configs/polybar/ /home/mesch/.config/polybar/
 runuser mesch -c 'yay -S betterlockscreen'
 runuser mesch -c 'cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc /home/mesch/.config'
 runuser mesch -c 'betterlockscreen -u /home/mesch/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg'
+
+# GTK Theme
+pacman -S gnome-themes-extra gtk3 gtk-engine-murrine sassc --noconfirm --needed
+cd /tmp
+git clone --depth 1 https://github.com/nana-4/materia-theme
+cd materia-theme
+sed -i "s/1A73E8/388E3C/gI" src/_sass/_colors.scss
+sed -i "s/1A73E8/388E3C/gI" src/_sass/_color-palette.scss
+sed -i "s/8AB4F8/388E3C/gI" src/_sass/_color-palette.scss
+sed -i "s/8AB4F8/388E3C/gI" src/_sass/_colors.scss
+./parse-sass.sh
+sudo ./install.sh
+cd /tmp/arch
+
+cp -r configs/gtk3 /home/mesch/.config/gtk-3.0/
 
 # Rofi
 pacman -S rofi --noconfirm --needed

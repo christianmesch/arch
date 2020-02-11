@@ -6,3 +6,4 @@ cp ~/.config/polybar/* $SCRIPTPATH/configs/polybar/
 cp /etc/lightdm/* $SCRIPTPATH/configs/lightdm/
 cp ~/Pictures/wallpapers/* $SCRIPTPATH/configs/wallpaper/
 cp ~/.bashrc $SCRIPTPATH/configs/misc/
+cp ~/.config/gtk-3.0/settings.ini $SCRIPTPATH/configs/gtk3
