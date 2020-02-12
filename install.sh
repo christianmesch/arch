@@ -89,6 +89,17 @@ cp -r configs/gtk3 /home/mesch/.config/gtk-3.0/
 
 # Rofi
 pacman -S rofi --noconfirm --needed
+runuser mesch -c 'yay -S --noconfirm nerd-fonts-complete'
+runuser mesch -c 'yay -S --noconfirm paper-icon-theme-git'
+cd /tmp
+runuser mesch -c 'git clone https://gitlab.com/vahnrr/rofi-menus.git'
+cd rofi-menus
+chmod +x scripts/*
+cp -r scripts themes config.rasi /home/mesch/.config/rofi
+cp -r networkmanager-dmenu /home/mesch/.config
+cp /home/mesch/.config/rofi/themes/shared/colorscheme/dark-amber.rasi /home/mesch/.config/rofi/themes/shared/colorscheme/dark-green.rasi
+sed -i "s/ffbf00/388E3C/gI" /home/mesch/.config/rofi/themes/shared/colorscheme/dark-green.rasi
+sed -i "s/dark-steel-blue/dark-green/gI" /home/mesch/.config/rofi/themes/shared/settings.rasi
 
 # IDE
 runuser mesch -c 'yay -S --noconfirm visual-studio-code-bin'
