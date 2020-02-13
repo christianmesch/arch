@@ -170,9 +170,9 @@ bindsym $mod+r mode "resize"
 
 ########## Custom configuration #############
 
-exec_always --no-startup-id /home/mesch/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-exec --no-startup-id feh --bg-scale /home/mesch/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg 
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg 
 
 # Lock screen
 bindsym $mod+l exec betterlockscreen -l dim

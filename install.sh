@@ -1,131 +1,73 @@
 #!/bin/bash
-pacman -S bash-completion --noconfirm --needed
+echo "Installing Arch Linux"
+
+# Variables
+_USER=mesch
+_HOME=/home/${_USER}
+_HOME_CONFIG=${_HOME}/.config
+_INSTALL_ROOT=/tmp/install-root
+_INSTALL_DIR=${_INSTALL_ROOT}/arch
+_INSTALL_CONFIG=${_INSTALL_DIR}/configs
+_ACCENT_COLOR=388E3C
+
+# Creating installation root folder
+echo "Creating install root"
+mkdir -p ${_INSTALL_ROOT}
 
 # Create user
-useradd -m mesch
-chown -R mesch:mesch /home/mesch
+echo "Creating user ${_USER}"
+useradd -m ${_USER}
+chown -R ${_USER}:${_USER} ${_HOME}
+passwd ${_USER}
 
-echo "Password"
-passwd mesch
-
-echo "mesch ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# Adding user to sudoers without password
+echo "${_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Clone full repo
-cd /tmp
+echo "Cloning full repo"
+cd ${_INSTALL_ROOT}
 git clone https://github.com/christianmesch/arch.git
-chown -R mesch:mesch arch
+chown -R ${_USER}:${_USER} arch
 chmod -R 777 arch
 cd arch
 pacman -Syu
 pacman -Syy
 
-# Yay
-cd /tmp
-git clone https://aur.archlinux.org/yay.git
-chmod -R 777 yay
-cd yay
-runuser mesch -c 'makepkg -si'
-cd /tmp/arch
+# Load install functions
+. ./functions.sh
 
-# npm
-pacman -S npm --noconfirm --needed
-
-# Network
-pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet
-systemctl enable NetworkManager
-systemctl enable wpa_supplicant.service
-
-# Graphics
-echo "Installing xorg display server"
-pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xterm --noconfirm --needed
-
-echo "Opting for opensource nvidia drivers"
-pacman -S xf86-video-nouveau --noconfirm --needed
-
-# Copy wallpapers
-mkdir -p /home/mesch/Pictures/wallpapers
-cp -r configs/wallpapers /home/mesch/Pictures/wallpapers
-
-# lightdm, display manager
-pacman -S lightdm --noconfirm --needed
-systemctl enable lightdm.service
-
-runuser mesch -c 'yay -S --noconfirm lightdm-mini-greeter'
-
-cp -r configs/lightdm/ /etc/lightdm/
-
-# i3
-pacman -S i3 --noconfirm --needed
-
-mkdir -p /home/mesch/.config/i3
-cp -r configs/i3/ /home/mesch/.config/i3/
-
-# Polybar̈́
-runuser -c mesch 'yay -S --noconfirm polybar-git'
-install -Dm644 /usr/share/doc/polybar/config /home/mesch/.config/polybar/config
-pacman -S ttf-font-awesome --noconfirm --needed
-
-cp -r configs/polybar/ /home/mesch/.config/polybar/
-
-# Betterlockscreen
-runuser mesch -c 'yay -S --noconfirm betterlockscreen'
-runuser mesch -c 'cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc /home/mesch/.config'
-runuser mesch -c 'betterlockscreen -u /home/mesch/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg'
-
-# GTK Theme
-pacman -S gnome-themes-extra gtk3 gtk-engine-murrine sassc --noconfirm --needed
-cd /tmp
-git clone --depth 1 https://github.com/nana-4/materia-theme
-cd materia-theme
-sed -i "s/1A73E8/388E3C/gI" src/_sass/_colors.scss
-sed -i "s/1A73E8/388E3C/gI" src/_sass/_color-palette.scss
-sed -i "s/8AB4F8/388E3C/gI" src/_sass/_color-palette.scss
-sed -i "s/8AB4F8/388E3C/gI" src/_sass/_colors.scss
-./parse-sass.sh
-sudo ./install.sh
-cd /tmp/arch
-
-cp -r configs/gtk3 /home/mesch/.config/gtk-3.0/
-
-# Rofi
-pacman -S rofi --noconfirm --needed
-runuser mesch -c 'yay -S --noconfirm nerd-fonts-complete'
-runuser mesch -c 'yay -S --noconfirm paper-icon-theme-git'
-cd /tmp
-runuser mesch -c 'git clone https://gitlab.com/vahnrr/rofi-menus.git'
-cd rofi-menus
-chmod +x scripts/*
-cp -r scripts themes config.rasi /home/mesch/.config/rofi
-cp -r networkmanager-dmenu /home/mesch/.config
-cp /home/mesch/.config/rofi/themes/shared/colorscheme/dark-amber.rasi /home/mesch/.config/rofi/themes/shared/colorscheme/dark-green.rasi
-sed -i "s/ffbf00/388E3C/gI" /home/mesch/.config/rofi/themes/shared/colorscheme/dark-green.rasi
-sed -i "s/dark-steel-blue/dark-green/gI" /home/mesch/.config/rofi/themes/shared/settings.rasi
-
-# IDE
-runuser mesch -c 'yay -S --noconfirm visual-studio-code-bin'
-runuser mesch -c 'yay -S --noconfirm jetbrains-toolbox'
-
-# Java
-pacman -S jdk-openjdk
-
-# Messaging
-runuser mesch -c 'yay -S --noconfirm slack-desktop'
-
-# Internet
-pacman -S firefox
+# Installers
+installYay
+installNpm
 
 # Utilities
-runuser mesch -c 'sudo npm install -g tldr'
-pacman -S diff-so-fancy --noconfirm --needed
-runuser mesch -c 'git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"'
-pacman -S bat --noconfirm --needed
-pacman -S ripgrep --noconfirm --needed
-pacman -S fd --noconfirm --needed
-pacman -S terminator --noconfirm --needed
+installNetworkUtils
+installGraphics
+installCLI
+copyWallpapers
 
-echo "Installing bluetooth manager"
-pacman -S blueberry --noconfirm --needed
+# GUI
+installLightdm
+installI3
+installPolybar
+installBetterLockscreen
+installGTKTheme
+installRofi
+
+# Development
+installIDEs
+installOpenJDK
+
+# Internet
+installFirefox
+
+# Messaging
+installSlack
+
+# Clean up installation files
+echo "Removing installation files"
+rm -rf ${_INSTALL_ROOT}
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
-echo "mesch ALL=(ALL:ALL) ALL"  >> /etc/sudoers
+echo "${_USER} ALL=(ALL:ALL) ALL"  >> /etc/sudoers
