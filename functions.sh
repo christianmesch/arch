@@ -16,7 +16,7 @@ function installNpm {
 
 function installNetworkUtils {
     echo "Installing network utilities"
-    pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet --noconfirm --needed
+    pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet netctl dialog --noconfirm --needed
     systemctl enable NetworkManager
     systemctl enable wpa_supplicant.service
 }
