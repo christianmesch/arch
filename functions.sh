@@ -31,7 +31,7 @@ function installGraphics {
 function copyWallpapers {
     echo "Copying wallpapers"
     mkdir -p ${_HOME}/Pictures/wallpapers
-    cp -r ${_INSTALL_CONFIG}/wallpapers ${_HOME}/Pictures/wallpapers    
+    cp -r ${_INSTALL_CONFIG}/wallpapers/* ${_HOME}/Pictures/wallpapers    
 }
 
 function installLightdm {
@@ -41,7 +41,7 @@ function installLightdm {
 
     echo "Configuring LightDM"
     runuser ${_USER} -c 'yay -S --noconfirm lightdm-mini-greeter'
-    cp -r configs/lightdm/ /etc/lightdm/
+    cp -r ${_INSTALL_CONFIG}/lightdm/* /etc/lightdm/
 }
 
 function installI3 {
@@ -50,7 +50,7 @@ function installI3 {
 
     echo "Configuring i3"
     mkdir -p ${_HOME_CONFIG}/i3
-    cp -r ${_INSTALL_CONFIG}/i3/ ${_HOME_CONFIG}/i3/
+    cp -r ${_INSTALL_CONFIG}/i3/* ${_HOME_CONFIG}/i3/
 }
 
 function installPolybar {
@@ -60,7 +60,7 @@ function installPolybar {
     pacman -S ttf-font-awesome --noconfirm --needed
 
     echo "Configuring Polybar"
-    cp -r ${_INSTALL_CONFIG}/polybar/ ${_HOME_CONFIG}/polybar/
+    cp -r ${_INSTALL_CONFIG}/polybar/* ${_HOME_CONFIG}/polybar/
 }
 
 function installBetterLockscreen {
@@ -85,7 +85,7 @@ function installGTKTheme {
     ./parse-sass.sh
     ./install.sh
 
-    cp -r ${_INSTALL_CONFIG}/gtk3 ${_HOME_CONFIG}/gtk-3.0/
+    cp -r ${_INSTALL_CONFIG}/gtk3/* ${_HOME_CONFIG}/gtk-3.0/
 }
 
 function installRofi {
@@ -105,8 +105,9 @@ function installRofi {
     cp -r networkmanager-dmenu ${_HOME_CONFIG}
 
     echo "Adding my own accent color to theme (#${_ACCENT_COLOR})"
-    cp ${_HOME_CONFIG}/rofi/themes/shared/colorscheme/dark-amber.rasi ${_HOME_CONFIG}/rofi/themes/shared/colorscheme/dark-accent.rasi
-    sed -i "s/ffbf00/${_ACCENT_COLOR}/gI" ${_HOME_CONFIG}/rofi/themes/shared/colorscheme/dark-accent.rasi
+    cd ${_HOME_CONFIG}/rofi/themes/shared/colorschemes
+    cp dark-amber.rasi dark-accent.rasi
+    sed -i "s/ffbf00/${_ACCENT_COLOR}/gI" ${_HOME_CONFIG}/rofi/themes/shared/colorschemes/dark-accent.rasi
     sed -i "s/dark-steel-blue/dark-accent/gI" ${_HOME_CONFIG}/rofi/themes/shared/settings.rasi
 }
 
