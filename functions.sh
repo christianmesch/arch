@@ -16,7 +16,7 @@ function installNpm {
 
 function installNetworkUtils {
     echo "Installing network utilities"
-    pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet netctl dialog --noconfirm --needed
+    pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet --noconfirm --needed
     systemctl enable NetworkManager
     systemctl enable wpa_supplicant.service
 }
@@ -31,7 +31,7 @@ function installGraphics {
 function copyWallpapers {
     echo "Copying wallpapers"
     mkdir -p ${_HOME}/Pictures/wallpapers
-    cp -r ${_INSTALL_CONFIG}/wallpapers/* ${_HOME}/Pictures/wallpapers    
+    cp -r ${_INSTALL_CONFIG}/wallpaper/* ${_HOME}/Pictures/wallpapers    
 }
 
 function installLightdm {
@@ -45,8 +45,8 @@ function installLightdm {
 }
 
 function installI3 {
-    echo "Installing i3"
-    pacman -S i3 --noconfirm --needed
+    echo "Installing i3 and feh"
+    pacman -S i3 feh --noconfirm --needed
 
     echo "Configuring i3"
     mkdir -p ${_HOME_CONFIG}/i3
@@ -55,7 +55,7 @@ function installI3 {
 
 function installPolybar {
     echo "Installing Polybar"
-    runuser -c ${_USER} 'yay -S --noconfirm polybar-git'
+    runuser ${_USER} -c 'yay -S --noconfirm polybar-git'
     install -Dm644 /usr/share/doc/polybar/config ${_HOME_CONFIG}/polybar/config
     pacman -S ttf-font-awesome --noconfirm --needed
 
@@ -64,6 +64,8 @@ function installPolybar {
 }
 
 function installBetterLockscreen {
+    echo "Removing i3lock in favor of BetterLockscreen"
+    pacman -Rs i3lock --noconfirm
     echo "Installing BetterLockscreen"
     runuser ${_USER} -c 'yay -S --noconfirm betterlockscreen'
 
@@ -85,6 +87,7 @@ function installGTKTheme {
     ./parse-sass.sh
     ./install.sh
 
+    mkdir -p ${_HOME_CONFIG}/gtk-3.0/
     cp -r ${_INSTALL_CONFIG}/gtk3/* ${_HOME_CONFIG}/gtk-3.0/
 }
 
@@ -101,6 +104,7 @@ function installRofi {
     runuser ${_USER} -c 'git clone --depth 1 https://gitlab.com/vahnrr/rofi-menus.git'
     cd rofi-menus
     chmod +x scripts/*
+    mkdir -p ${_HOME_CONFIG}/rofi
     cp -r scripts themes config.rasi ${_HOME_CONFIG}/rofi
     cp -r networkmanager-dmenu ${_HOME_CONFIG}
 
