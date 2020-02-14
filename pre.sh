@@ -21,6 +21,8 @@ mount /dev/sda4 /mnt/home
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
+wifi-menu
+
 pacstrap /mnt base base-devel linux linux-firmware vim git
 genfstab -U /mnt >> /mnt/etc/fstab
 
