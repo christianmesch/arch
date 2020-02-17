@@ -2,32 +2,32 @@
 echo "Installing Arch Linux"
 
 # Variables
-_USER=mesch
-_HOME=/home/${_USER}
-_HOME_CONFIG=${_HOME}/.config
-_INSTALL_ROOT=/tmp/install-root
-_INSTALL_DIR=${_INSTALL_ROOT}/arch
-_INSTALL_CONFIG=${_INSTALL_DIR}/configs
-_ACCENT_COLOR=388E3C
+_user=mesch
+_home=/home/$_user
+_home_config=$_home/.config
+_install_root=/tmp/install-root
+_install_dir=$_install_root/arch
+_install_config=$_install_dir/configs
+_accent_color=388E3C
 
 # Creating installation root folder
 echo "Creating install root"
-mkdir -p ${_INSTALL_ROOT}
+mkdir -p $_install_root
 
 # Create user
-echo "Creating user ${_USER}"
-useradd -m ${_USER}
-chown -R ${_USER}:${_USER} ${_HOME}
-passwd ${_USER}
+echo "Creating user $_user"
+useradd -m $_user
+chown -R $_user:$_user $_home
+passwd $_user
 
 # Adding user to sudoers without password
-echo "${_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "$_user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Clone full repo
 echo "Cloning full repo"
-cd ${_INSTALL_ROOT}
+cd $_install_root
 git clone https://github.com/christianmesch/arch.git
-chown -R ${_USER}:${_USER} arch
+chown -R $_user:$_user arch
 chmod -R 777 arch
 cd arch
 pacman -Syu
@@ -43,7 +43,9 @@ installNpm
 # Utilities
 installNetworkUtils
 installGraphics
+installTerminator
 installCLI
+installBlueberry
 copyWallpapers
 
 # GUI
@@ -65,9 +67,8 @@ installFirefox
 installSlack
 
 # Clean up installation files
-echo "Removing installation files"
-rm -rf ${_INSTALL_ROOT}
+removeInstallationFolder
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
-echo "${_USER} ALL=(ALL:ALL) ALL"  >> /etc/sudoers
+echo "$_user ALL=(ALL:ALL) ALL"  >> /etc/sudoers
