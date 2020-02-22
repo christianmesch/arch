@@ -37,7 +37,8 @@ function installYay {
     git clone --depth 1 https://aur.archlinux.org/yay.git
     chmod -R 777 yay
     cd yay
-    runuser $_user -c 'makepkg -si'
+    run user -u $_user -- makepkg -si
+    chown -R $_user:$_user $_home_config/yay
 }
 
 function installNpm {
