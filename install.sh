@@ -73,7 +73,7 @@ chown -R $_user:$_user $_home
 # Clean up installation files
 removeInstallationFolder
 
-test -e $_error_file && echo "No errors" || echo "Errors found"
+test -e $_error_file && echo "Errors found" || echo "No errors"
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
