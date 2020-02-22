@@ -1,0 +1,30 @@
+@import "colors.rasi"
+* {
+    background-color: @background;
+    text-color: @foreground;
+}
+
+#window {
+    padding: 30;
+    width: 353;
+    children: [ horibox ];
+}
+
+#horibox {
+    children: [ listview ];
+}
+
+#listview {
+    layout: horizontal;
+}
+
+#element {
+    padding: 40;
+    background-color: @background-light;
+}
+
+#element.selected {
+    background-color: @accent;
+    text-color: @background;
+}
+

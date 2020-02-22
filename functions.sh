@@ -127,24 +127,10 @@ function installRofi {
     run "Installing Rofi" \
         "pacman -S rofi --noconfirm --needed"
 
-    run "Installing needed icons for Rofi menus" \
-        "yay -S --noconfirm nerd-fonts-complete" \
-        "yay -S --noconfirm paper-icon-theme-git"
-
     run "Configuring Rofi" \
-        "cd $_install_root" \
-        "git clone --depth 1 https://gitlab.com/vahnrr/rofi-menus.git" \
-        "cd rofi-menus" \
-        "chmod +x scripts/*" \
-        "mkdir -p $_home_config/rofi" \
-        "cp -r scripts themes config.rasi $_home_config/rofi" \
-        "cp -r networkmanager-dmenu $_home_config"
-
-    run "Adding my own accent color to theme (#$_accent_color)" \
-        "cd $_home_config/rofi/themes/shared/colorschemes" \
-        "cp dark-amber.rasi $_accent_color.rasi" \
-        "sed -i s/ffbf00/$_accent_color/gI $_home_config/rofi/themes/shared/colorschemes/dark-$_accent_color.rasi" \
-        "sed -i s/dark-steel-blue/dark-$_accent_color/gI $_home_config/rofi/themes/shared/settings.rasi"
+        "mkdir $_home_config/rofi" \
+        "cp -r $_install_config/rofi/* $_home_config/rofi" \
+        "chmod +x $_home_config/rofi/scripts/*"
 }
 
 function installIDEs {
@@ -189,13 +175,21 @@ function installCLI {
         "pacman -S diff-so-fancy --noconfirm --needed" \
         "pacman -S bat --noconfirm --needed" \
         "pacman -S ripgrep --noconfirm --needed" \
-        "pacman -S fd --noconfirm --needed"
+        "pacman -S fd --noconfirm --needed" \
 
     run "Copying .bashrc" \
         "cp $_install_config/misc/.bashrc $_home"
 
     run "Copying .gitconfig" \
         "cp $_install_config/misc/.gitconfig $_home"
+}
+
+function installScrot {
+    run "Installing scrot" \
+        "pacman -S scrot --noconfirm --needed"
+
+    run "Creating folder for screenshots" \
+        "mkdir $_home/Pictures/scrot"
 }
 
 function installBlueberry {

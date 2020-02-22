@@ -66,6 +66,9 @@ installFirefox
 # Messaging
 installSlack
 
+# Setting user as owner on home folder
+chown -R $_user:$_user $_home
+
 # Clean up installation files
 removeInstallationFolder
 
