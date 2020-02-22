@@ -12,7 +12,7 @@ function run {
     for var in "${@:2}"; do
         IFS=' ' read -ra cmd <<< "$var"
         if [ ${cmd[0]} = "yay" ]; then
-            _command=$( printf "runuser -u %s -- %q" "$_user" "${cmd[@]:1}" )
+            _command="runuser -u $_user -- ${cmd[@]}"
         else
             _command="${cmd[@]}"
         fi
@@ -109,10 +109,16 @@ function installBetterLockscreen {
 
 function installGTKTheme {
     run "Installing and configuring GTK Theme (Materia Theme)" \
-        "pacman -S gnome-themes-extra gtk3 gtk-engine-murrine sassc --noconfirm --needed" \
-        "cd $_install_root" \
-        "git clone --depth 1 https://github.com/nana-4/materia-theme" \
-        "cd materia-theme" \
+        "pacman -S gnome-themes-extra gtk3 gtk-engine-murrine sassc --noconfirm --needed"
+
+    cd $_install_root
+
+    run "Cloning Materia Theme" \
+        "git clone --depth 1 https://github.com/nana-4/materia-theme"
+
+    cd materia-theme
+
+    run "Adding my accent color to theme" \
         "sed -i s/\(1A73E8\|8AB4F8\)/$_accent_color/gI src/_sass/_colors.scss" \
         "sed -i s/\(1A73E8\|8AB4F8\)/$_accent_color/gI src/_sass/_color-palette.scss" \
         "./parse-sass.sh" \
@@ -165,13 +171,13 @@ function installTerminator {
         "pacman -S terminator --noconfirm --needed"
 
     run "Configuring Terminator" \
-        "cp $_install_config/terminator/config $_home_config/terminator"
+        "cp -r $_install_config/terminator $_home_config/"
 
 }
 
 function installCLI {
     run "Installing various CLIs" \
-        "runuser ${_user} -c 'sudo npm install -g tldr'" \
+        "runuser -u ${_user} -- sudo npm install -g tldr" \
         "pacman -S diff-so-fancy --noconfirm --needed" \
         "pacman -S bat --noconfirm --needed" \
         "pacman -S ripgrep --noconfirm --needed" \
