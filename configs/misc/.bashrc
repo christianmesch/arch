@@ -8,7 +8,7 @@
 alias ls='ls --color=auto'
 alias ll="ls -l --color=auto"
 alias lal="ls -al --color=auto"
-#PS1='[\u@\h \W]\$ '
+
 PS1='[\u@\h \W$(parse_git_branch)] λ '
 
 bind '"\e[A": history-search-backward'
@@ -20,6 +20,9 @@ alias find="fd"
 
 export HISTCONTROL=ignoredups
 shopt -s autocd
+
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ ~ \1/'

@@ -176,6 +176,7 @@ function installCLI {
         "pacman -S bat --noconfirm --needed" \
         "pacman -S ripgrep --noconfirm --needed" \
         "pacman -S fd --noconfirm --needed" \
+        "pacman -S fzf --noconfirm --needed"
 
     run "Copying .bashrc" \
         "cp $_install_config/misc/.bashrc $_home"
