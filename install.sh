@@ -9,6 +9,7 @@ _install_root=/tmp/install-root
 _install_dir=$_install_root/arch
 _install_config=$_install_dir/configs
 _accent_color=388E3C
+_error_file=/tmp/installation-error.log
 
 # Creating installation root folder
 echo "Creating install root"
@@ -71,6 +72,8 @@ chown -R $_user:$_user $_home
 
 # Clean up installation files
 removeInstallationFolder
+
+test -e $_error_file && echo "No errors" || echo "Errors found"
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers

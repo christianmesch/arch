@@ -24,7 +24,7 @@ function run {
         else
             echo "$_command
 $_error
-" >> error.log
+" >> $_error_file
             echo "  $_red FAIL$_normal"
             break
         fi
