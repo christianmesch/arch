@@ -18,6 +18,7 @@ mkdir -p $_install_root
 # Create user
 echo "Creating user $_user"
 useradd -m $_user
+mkdir -p $_home_config
 chown -R $_user:$_user $_home
 passwd $_user
 

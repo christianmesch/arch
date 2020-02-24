@@ -38,7 +38,6 @@ function installYay {
     chmod -R 777 yay
     cd yay
     runuser -u $_user -- makepkg -si
-    chown -R $_user:$_user $_home_config/yay
 }
 
 function installNpm {
