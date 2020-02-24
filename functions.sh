@@ -204,6 +204,31 @@ function installBlueberry {
         "pacman -S blueberry --noconfirm --needed"
 }
 
+function setTimeAndLocale {
+    run "Setting time" \
+        "ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime" \
+        "hwclock --systohc"
+
+    run "Setting locale" \
+        "sed -i s/\#en_US.UTF-8/en_US.UTF-8/gI /etc/locale.gen" \
+        "locale-gen"
+        "echo 'LANG=en_US.UTF-8' > /etc/locale.conf" \
+        "echo 'KEYMAP=sv-latin1' > /etc/vconsole.conf"
+}
+
+function setHostname {
+    run "Set hostname" \
+        "echo '$_hostname' >> /etc/hostname" \
+        "echo '$_hostname' >> /etc/hosts"
+}
+
+function installGrub {
+    run "Install grub" \
+        "pacman -S grub efibootmgr" \
+        "grub-install --target=x86_64-efi --efi-directory=/boot" \
+        "grub-mkconfig -o /boot/grub/grub.cfg"
+}
+
 function removeInstallationFolder {
     run "Removing installation files" \
         "rm -rf $_install_root"

@@ -29,27 +29,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Root
 arch-chroot /mnt /bin/bash
 
-# Time and locale
-ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-hwclock --systohc
-
-vim /etc/locale.gen # Uncomment en_US.UTF-8 UTF-8
-locale-gen
-
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo "KEYMAP=sv-latin1" > /etc/vconsole.conf
-localectl set-x11-keymap se
-
-# Hostname
-echo "soundwave" >> /etc/hostname
-echo "soundwave" >> /etc/hosts
-
 # Root password
 passwd
 
-# Grub
-pacman -S grub efibootmgr
-
-grub-install --target=x86_64-efi --efi-directory=/boot
-
-grub-mkconfig -o /boot/grub/grub.cfg
