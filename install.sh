@@ -38,11 +38,6 @@ pacman -Syy
 # Load install functions
 . ./functions.sh
 
-# Pre setup
-setTimeAndLocale
-setHostname
-installGrub
-
 # Installers
 installYay
 installNpm
