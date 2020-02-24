@@ -5,7 +5,7 @@
 }
 
 #window {
-    padding: 30;
+    padding: 20 15 20 15;
     width: 353;
     children: [ horibox ];
 }
@@ -20,6 +20,7 @@
 
 #element {
     padding: 40;
+    margin: 0 5 0 5;
     background-color: @background-light;
 }
 
@@ -27,4 +28,3 @@
     background-color: @accent;
     text-color: @background;
 }
-
