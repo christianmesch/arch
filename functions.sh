@@ -104,7 +104,7 @@ function installBetterLockscreen {
 
     run "Configuring BetterLockscreen" \
         "cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $_home_config" \
-        "betterlockscreen -u $_home/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg"
+        "runuser -u $_user -- betterlockscreen -u $_home/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg"
 }
 
 function installGTKTheme {
