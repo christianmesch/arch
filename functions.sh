@@ -1,10 +1,6 @@
 #!/bin/bash
 
 function run {
-    _bold=$(tput bold)
-    _normal=$(tput sgr0)
-    _green=$(tput setaf 2)
-    _red=$(tput setaf 1)
     _error=""
     _command=""
 
@@ -31,13 +27,17 @@ $_error
     done
 }
 
-function installYay {
-    echo "Installing yay"
+function installYay {    
     cd $_install_root
-    git clone --depth 1 https://aur.archlinux.org/yay.git
-    chmod -R 777 yay
+    
+    run "Cloning yay repo" \
+        "git clone --depth 1 https://aur.archlinux.org/yay.git" \
+        "chmod -R 777 yay"
+
     cd yay
-    runuser -u $_user -- makepkg -si
+
+    run "Installing yay" \
+        "runuser -u $_user -- makepkg -si --noconfirm --needed"
 }
 
 function installNpm {
@@ -202,6 +202,35 @@ function installScrot {
 function installBlueberry {
     run "Installing Blueberry" \
         "pacman -S blueberry --noconfirm --needed"
+}
+
+function setTimeAndLocale {
+    run "Setting time" \
+        "ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime" \
+        "hwclock --systohc"
+
+    run "Generating locale" \
+        "sed -i s/\#en_US.UTF-8/en_US.UTF-8/gI /etc/locale.gen" \
+        "locale-gen"
+
+    run "Adding land and keymap to locale.conf and vconsole.conf" \
+        "$(echo 'LANG=en_US.UTF-8' > /etc/locale.conf)" \
+        "$(echo 'KEYMAP=sv-latin1' > /etc/vconsole.conf)"
+}
+
+function setHostname {
+    run "Adding hostname to hostname and hosts" \
+        "$(echo $_hostname >> /etc/hostname)" \
+        "$(echo $_hostname >> /etc/hosts)"
+}
+
+function installGrub {
+    run "Installing grub" \
+        "pacman -S grub efibootmgr --noconfirm --needed" \
+        "grub-install --target=x86_64-efi --efi-directory=/boot"
+
+    run "Configuring grub" \
+        "grub-mkconfig -o /boot/grub/grub.cfg"
 }
 
 function removeInstallationFolder {

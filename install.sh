@@ -1,8 +1,13 @@
 #!/bin/bash
 echo "Installing Arch Linux"
 
+# Read user and hostname
+read -p 'Username [mesch]: ' _user
+read -p 'Hostname [soundwave]: ' _hostname
+
 # Variables
-_user=mesch
+_user=${_user:-mesch}
+_hostname=${_hostname:-soundwave}
 _home=/home/$_user
 _home_config=$_home/.config
 _install_root=/tmp/install-root
@@ -10,6 +15,10 @@ _install_dir=$_install_root/arch
 _install_config=$_install_dir/configs
 _accent_color=388E3C
 _error_file=/tmp/installation-error.log
+_bold=$(tput bold)
+_normal=$(tput sgr0)
+_green=$(tput setaf 2)
+_red=$(tput setaf 1)
 
 # Creating installation root folder
 echo "Creating install root"
@@ -37,6 +46,11 @@ pacman -Syy
 
 # Load install functions
 . ./functions.sh
+
+# Pre
+setTimeAndLocale
+setHostname
+installGrub
 
 # Installers
 installYay
@@ -68,13 +82,14 @@ installFirefox
 # Messaging
 installSlack
 
-# Setting user as owner on home folder
+# Setting user as owner on home folder again
 chown -R $_user:$_user $_home
 
 # Clean up installation files
 removeInstallationFolder
 
-test -e $_error_file && echo "Errors found" || echo "No errors"
+echo "${_bold}Verifying installation$_normal"
+test -e $_error_file && echo "${_red}Errors found$_normal" || echo "${_green}No errors$_normal"
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
