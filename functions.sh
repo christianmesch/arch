@@ -7,21 +7,21 @@ function run {
     echo "$_bold$1$_normal"
     for var in "${@:2}"; do
         IFS=' ' read -ra cmd <<< "$var"
-        if [ ${cmd[0]} = "yay" ]; then
+        if [[ ${cmd[0]} == "yay" ]]; then
             _command="runuser -u $_user -- ${cmd[@]}"
         else
             _command="${cmd[@]}"
         fi
 
-        printf "$_command"
+        printf "%-80s | " "${_command::80}"
         _error=$(exec $_command 2>&1 >/dev/null)
         if [ $? -eq 0 ]; then
-            echo "  $_green SUCCESS$_normal"
+            echo "${_green}SUCCESS$_normal"
         else
             echo "$_command
 $_error
 " >> $_error_file
-            echo "  $_red FAIL$_normal"
+            echo "${_red}FAIL$_normal"
             break
         fi
     done
