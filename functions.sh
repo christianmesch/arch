@@ -56,6 +56,9 @@ function installGraphics {
     run "Installing xorg display server" \
         "pacman -S xorg-server xorg-apps xorg-xinit xorg-twm --noconfirm --needed"
 
+    run "Copying .xinitrc" \
+        "cp $_install_config/misc/.xinitrc $_home"
+
     run "Installing open source Nvidia drivers" \
         "pacman -S xf86-video-nouveau --noconfirm --needed"
 }
