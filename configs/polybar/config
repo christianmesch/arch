@@ -31,7 +31,7 @@ label-focused-padding = 2
 width = 100%
 height = 27
 modules-left = i3
-modules-right = pulseaudio bluetooth wlan eth battery date powermenu
+modules-right = pulseaudio bluetooth backlight wlan eth battery date powermenu
 radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -167,6 +167,23 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+format = "<ramp> <label>"
+label = "%percentage%%"
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = ${colors.foreground-alt}
+
 [module/eth]
 type = internal/network
 interface = enp0s25
@@ -200,12 +217,18 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume>
-label-volume =  %percentage%%
-label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume> <label-volume>
+
+label-volume = %percentage%%
+label-volume-foreground = ${colors.foreground}
 
 label-muted =  %percentage%%
-label-muted-foreground = #666
+label-muted-foreground = ${colors.foreground-alt}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery

@@ -207,6 +207,14 @@ function installBlueberry {
         "pacman -S blueberry --noconfirm --needed"
 }
 
+function installLight {
+    run "Installing Light" \
+        "pacman -S light --noconfirm --needed"
+
+    run "Adding user to video group" \
+        "usermod -aG video $_user"
+}
+
 function setTimeAndLocale {
     run "Setting time" \
         "ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime" \

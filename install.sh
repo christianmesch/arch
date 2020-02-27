@@ -62,6 +62,7 @@ installGraphics
 installTerminator
 installCLI
 installBlueberry
+installLight
 copyWallpapers
 
 # GUI
