@@ -89,7 +89,7 @@ chown -R $_user:$_user $_home
 removeInstallationFolder
 
 echo "${_bold}Verifying installation$_normal"
-test -e $_error_file && echo "${_red}Errors found$_normal" || echo "${_green}No errors$_normal"
+test -e $_error_file && echo "${_red}Errors found!$_normal Read output at $_error_file" || echo "${_green}No errors$_normal"
 
 # Fix sudoers
 head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
