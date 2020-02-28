@@ -56,8 +56,8 @@ function installGraphics {
     run "Installing xorg display server" \
         "pacman -S xorg-server xorg-apps xorg-xinit xorg-twm --noconfirm --needed"
 
-    run "Copying .xinitrc" \
-        "cp $_install_config/misc/.xinitrc $_home"
+    run "Copying .Xkbmap" \
+        "cp $_install_config/misc/.Xkbmap $_home"
 
     run "Installing open source Nvidia drivers" \
         "pacman -S xf86-video-nouveau --noconfirm --needed"
@@ -121,9 +121,15 @@ function installGTKTheme {
 
     cd materia-theme
 
+    run "Installing needed dependencies for generating theme" \
+        "pacman -S inkscape optipng --noconfirm --needed"
+
     echo "${_bold}Addig my colors to materia theme$_normal"
 
-    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=0c0c0c\nFG=eeeeee\nHDR_BG=0c0c0c\nHDR_FG=e0e0e0\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n") 1>/dev/null
+    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=0c0c0c\nFG=eeeeee\nHDR_BG=0c0c0c\nHDR_FG=e0e0e0\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n")
+
+    run "Move generated theme to user folder" \
+        "mv /root/.themes/ $_home"
 
     run "Configure GTK" \
         "mkdir -p $_home_config/gtk-3.0/" \
