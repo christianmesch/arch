@@ -61,6 +61,7 @@ installNetworkUtils
 installGraphics
 installTerminator
 installCLI
+installScrot
 installBlueberry
 installLight
 copyWallpapers
