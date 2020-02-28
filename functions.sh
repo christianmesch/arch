@@ -126,7 +126,7 @@ function installGTKTheme {
 
     echo "${_bold}Addig my colors to materia theme$_normal"
 
-    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=0c0c0c\nFG=eeeeee\nHDR_BG=0c0c0c\nHDR_FG=e0e0e0\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n")
+    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=0c0c0c\nFG=eeeeee\nHDR_BG=0c0c0c\nHDR_FG=e0e0e0\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n") 1>/dev/null
 
     run "Move generated theme to user folder" \
         "mv /root/.themes/ $_home"
