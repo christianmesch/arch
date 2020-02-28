@@ -1,2 +1,9 @@
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset <%an>' --abbrev-commit --date=relative
+	sts = status -s
+	st = status
+	co = checkout
+	br = branch
+	cm = commit

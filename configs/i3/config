@@ -179,6 +179,15 @@ bindsym $mod+d exec ~/.config/rofi/scripts/appsmenu.sh
 # Print screen
 bindsym Print exec ~/.config/rofi/scripts/scrotmenu.sh
 
+# class                 border  bground text    indicator child_border
+client.focused          #0C0C0C #0C0C0C #E0E0E0 #0C0C0C   #0C0C0C
+client.focused_inactive #222222 #222222 #E0E0E0 #222222   #222222
+client.unfocused        #222222 #222222 #E0E0E0 #222222   #222222
+client.urgent           #2F343A #900000 #E0E0E0 #900000   #900000
+client.placeholder      #0C0C0C #0C0C0C #E0E0E0 #0C0C0C   #0C0C0C
+
+client.background       #424242
+
 gaps inner 10
 gaps outer 0
 
