@@ -19,13 +19,12 @@
 [colors]
 background = #0c0c0c
 background-alt = #222
-;foreground = #A7C9C3
 foreground = #d0d0d0
 foreground-focus = #388E3C
 foreground-alt = #555
 primary = #388E3C
 secondary = #b50444
-alert = #029e0c
+alert = #d98600
 label-focused-padding = 2
 
 [bar/poly]
@@ -37,8 +36,8 @@ radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 3
-border-size = 4
-border-color = #000000
+border-size = 0
+border-color = ${colors.background}
 padding-left = 0
 padding-right = 2
 module-margin-left = 1
@@ -120,17 +119,19 @@ label-focused-padding = ${colors.label-focused-padding}
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
 label-unfocused-padding = ${colors.label-focused-padding}
+label-unfocused-underline = ${colors.background}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %icon% %index%
+label-urgent = %icon%
+label-urgent-background = ${colors.background}
 label-urgent-foreground = ${colors.alert}
-label-urgent-background = ${colors.alert}
+label-urgent-underline = ${colors.alert}
 label-urgent-padding = ${colors.label-focused-padding}
 
 [module/cpu]
