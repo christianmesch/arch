@@ -1,5 +1,7 @@
 # Installation
 
+Start by following the [pre.sh](pre.sh) (I haven't tried to automate those steps yet) and then do the following
+
 ```
 curl -O https://raw.githubusercontent.com/christianmesch/arch/master/install.sh
 chmod +x install.sh
