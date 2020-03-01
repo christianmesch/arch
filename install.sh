@@ -65,6 +65,7 @@ installScrot
 installBlueberry
 installLight
 copyWallpapers
+copyCustomScripts
 
 # GUI
 installLightdm

@@ -106,8 +106,7 @@ function installBetterLockscreen {
         "yay -S --noconfirm betterlockscreen"
 
     run "Configuring BetterLockscreen" \
-        "cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $_home_config" \
-        "runuser -u $_user -- betterlockscreen -u $_home/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg"
+        "cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $_home_config"
 }
 
 function installGTKTheme {
@@ -217,6 +216,11 @@ function installLight {
 
     run "Adding user to video group" \
         "usermod -aG video $_user"
+}
+
+function copyCustomScripts {
+    run "Copying custom config scripts" \
+        "cp -r $_install_config/custom-scripts $_home_config/"
 }
 
 function setTimeAndLocale {
