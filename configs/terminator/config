@@ -16,5 +16,6 @@
     copy_on_selection = True
     cursor_color = "#aaaaaa"
     foreground_color = "#e0e0e0"
+    scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False

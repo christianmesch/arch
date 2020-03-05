@@ -49,7 +49,9 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0"
 font-3 = "Font Awesome 5 Brands:style=Solid:pixelsize=10;0"
 font-4 = unifont:size=6;1
 
-tray-position = right
+monitor = ${env:MONITOR:}
+
+tray-position = ${env:TRAY:right}
 tray-padding = 2
 
 [module/bluetooth]
@@ -150,7 +152,8 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlo1
+;interface = wlo1
+interface = wlp59s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -188,7 +191,8 @@ ramp-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp0s25
+;interface = enp0s25
+interface = enp0s20f0u5u1
 interval = 3.0
 
 format-connected-prefix = " "

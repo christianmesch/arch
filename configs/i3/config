@@ -166,6 +166,11 @@ bindsym $mod+r mode "resize"
 
 ########## Custom configuration #############
 
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+focus_follows_mouse no
+
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg
@@ -178,8 +183,20 @@ bindsym $mod+l exec betterlockscreen -l dim
 # Rofi program launcher
 bindsym $mod+d exec ~/.config/rofi/scripts/appsmenu.sh
 
+# Rofi display menu
+bindsym $mod+Shift+d exec ~/.config/rofi/scripts/displaymenu.sh
+
 # Print screen
 bindsym Print exec ~/.config/rofi/scripts/scrotmenu.sh
+
+# Twitch menu
+bindsym $mod+Shift+t exec ~/.config/rofi/scripts/twitchmenu.sh
+
+# Move workspace one monitor left
+bindsym $mod+Ctrl+Left move workspace to output left
+
+# Move workspace one monitor right
+bindsym $mod+Ctrl+Right move workspace to output right
 
 # class                 border  bground text    indicator child_border
 client.focused          #0C0C0C #0C0C0C #E0E0E0 #0C0C0C   #0C0C0C

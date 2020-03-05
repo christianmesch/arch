@@ -12,3 +12,4 @@ cp ~/.config/gtk-3.0/* $SCRIPTPATH/configs/gtk3
 cp ~/.config/terminator/config $SCRIPTPATH/configs/terminator
 cp -r ~/.config/rofi/* $SCRIPTPATH/configs/rofi/
 cp -r ~/.custom-scripts/* $SCRIPTPATH/configs/misc/.custom-scripts/
+cp -r ~/.config/dunst/* $SCRIPTPATH/configs/dunst/

@@ -13,7 +13,7 @@ function run {
             _command="${cmd[@]}"
         fi
 
-        printf "%-80s | " "${_command::80}"
+        printf "%-100s | " "${_command::100}"
         _error=$(exec $_command 2>&1 >/dev/null)
         if [ $? -eq 0 ]; then
             echo "${_green}SUCCESS$_normal"
@@ -202,7 +202,7 @@ function installScrot {
         "pacman -S scrot --noconfirm --needed"
 
     run "Creating folder for screenshots" \
-        "mkdir $_home/Pictures/scrot"
+        "mkdir -p $_home/Pictures/scrot"
 }
 
 function installBlueberry {
@@ -218,9 +218,36 @@ function installLight {
         "usermod -aG video $_user"
 }
 
+function installDunst {
+    run "Installing Dunst" \
+        "pacman -S dunst --noconfirm --needed"
+
+    run "Configuring Dunst" \
+        "cp -r $_install_config/dunst $_home_config/"
+}
+
+function installLogitechUR {
+    run "Installing ltunify" \
+        "yay -S ltunify-git --noconfirm"
+
+    run "Creating plugdev group and adding user" \
+        "groupadd -f plugdev" \
+        "usermod -aG plugdev $_user"
+}
+
+function installVLC {
+    run "Installing VLC" \
+        "pacman -S vlc --noconfirm --needed"
+}
+
+function installStreamlink {
+    run "Installing Streamlink" \
+        "pacman -S streamlink --noconfirm --needed"
+}
+
 function copyCustomScripts {
     run "Copying custom config scripts" \
-        "cp -r $_install_config/custom-scripts $_home_config/"
+        "cp -r $_install_config/misc/.custom-scripts $_home/"
 }
 
 function setTimeAndLocale {

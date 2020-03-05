@@ -64,6 +64,10 @@ installCLI
 installScrot
 installBlueberry
 installLight
+installDunst
+installLogitechUR
+installVLC
+installStreamlink
 copyWallpapers
 copyCustomScripts
 
