@@ -82,6 +82,7 @@ installRofi
 # Development
 installIDEs
 installOpenJDK
+installDocker
 
 # Internet
 installFirefox

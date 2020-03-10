@@ -162,6 +162,19 @@ function installOpenJDK {
         "pacman -S jdk-openjdk --noconfirm --needed"
 }
 
+function installDocker {
+    run "Installing Docker and Docker Compose" \
+        "pacman -S docker --noconfirm --needed" \
+        "pacman -S docker-compose --noconfirm --needed"
+
+    run "Adding user to docker group" \
+        "usermod -aG docker $_user"
+
+    run "Start and enable docker service" \
+        "systemctl enable docker.service" \
+        "systemctl start docker.service"
+}
+
 function installFirefox {
     run "Installing Firefox" \
         "pacman -S firefox --noconfirm --needed"
@@ -247,7 +260,8 @@ function installStreamlink {
 
 function copyCustomScripts {
     run "Copying custom config scripts" \
-        "cp -r $_install_config/misc/.custom-scripts $_home/"
+        "cp -r $_install_config/misc/.custom-scripts $_home/" \
+        "chmod +x $_home/.custom-scripts/*"
 }
 
 function setTimeAndLocale {
