@@ -56,8 +56,9 @@ function installGraphics {
     run "Installing xorg display server" \
         "pacman -S xorg-server xorg-apps xorg-xinit xorg-twm --noconfirm --needed"
 
-    run "Copying .Xkbmap" \
-        "cp $_install_config/misc/.Xkbmap $_home"
+    run "Copying .Xkbmap and .Xresources" \
+        "cp $_install_config/misc/.Xkbmap $_home" \
+        "cp $_install_config/misc/.Xresources $_home"
 
     run "Installing open source Nvidia drivers" \
         "pacman -S xf86-video-nouveau --noconfirm --needed"

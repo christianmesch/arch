@@ -17,14 +17,13 @@
 ;==========================================================
 
 [colors]
-background = #0c0c0c
-background-alt = #222
-foreground = #d0d0d0
-foreground-focus = #388E3C
-foreground-alt = #555
-primary = #388E3C
-secondary = #b50444
-alert = #d98600
+background = ${xrdb:background:#0c0c0c}
+background-alt = ${xrdb:color0:#222222}
+foreground = ${xrdb:foreground:#d0d0d0}
+foreground-focus = ${xrdb:color2:#388e3c}
+foreground-alt = ${xrdb:color8:#555555}
+primary = ${xrdb:color2:#388e3c}
+alert = ${xrdb:color3:#d98600}
 label-focused-padding = 2
 
 [bar/poly]
@@ -62,7 +61,7 @@ type = custom/script
 ; Command to be executed (using "/usr/bin/env sh -c [command]")
 exec = ~/.custom-scripts/polybar-bluetooth.sh
 
-tail = true
+tail = false
 
 interval = 2
 ; Available tags:
@@ -90,12 +89,12 @@ label-unmounted-foreground = ${colors.foreground-alt}
 ws-icon-0 = 1 terminal;
 ws-icon-1 = 2 web;龜
 ws-icon-2 = 3 code;
-ws-icon-3 = 4 social;
+ws-icon-3 = 4 social;
 ws-icon-4 = 5 misc;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
-ws-icon-8 = 9;
+ws-icon-8 = 9 music;
 ws-icon-default = 
 
 type = internal/i3

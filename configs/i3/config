@@ -102,7 +102,7 @@ set $ws5 5 misc
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
+set $ws9 9 music
 set $ws10 "10"
 
 # switch to workspace
@@ -198,14 +198,19 @@ bindsym $mod+Ctrl+Left move workspace to output left
 # Move workspace one monitor right
 bindsym $mod+Ctrl+Right move workspace to output right
 
-# class                 border  bground text    indicator child_border
-client.focused          #0C0C0C #0C0C0C #E0E0E0 #0C0C0C   #0C0C0C
-client.focused_inactive #222222 #222222 #E0E0E0 #222222   #222222
-client.unfocused        #222222 #222222 #E0E0E0 #222222   #222222
-client.urgent           #2F343A #900000 #E0E0E0 #900000   #900000
-client.placeholder      #0C0C0C #0C0C0C #E0E0E0 #0C0C0C   #0C0C0C
+# Colors
+set_from_resource $fg foreground
+set_from_resource $bg background
+set_from_resource $blk color0
 
-client.background       #424242
+# class                 border  bground text    indicator child_border
+client.focused          $bg     $bg     $fg     $bg       $bg
+client.focused_inactive $blk    $blk    $fg     $blk      $blk
+client.unfocused        $blk    $blk    $fg     $blk      $blk
+client.urgent           $blk    $blk    $fg     $blk      $blk
+client.placeholder      $bg     $bg     $fg     $bg       $bg
+
+client.background       $bg
 
 gaps inner 10
 gaps outer 0
