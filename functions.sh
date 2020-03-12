@@ -211,6 +211,11 @@ function installCLI {
         "cp $_install_config/misc/.gitconfig $_home"
 }
 
+function installOpenssh {
+    run "Installing openssh" \
+        "pacman -S openssh --noconfirm --needed"
+}
+
 function installScrot {
     run "Installing scrot" \
         "pacman -S scrot --noconfirm --needed"

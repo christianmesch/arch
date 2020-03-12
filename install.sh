@@ -61,6 +61,7 @@ installNetworkUtils
 installGraphics
 installTerminator
 installCLI
+installOpenssh
 installScrot
 installBlueberry
 installLight

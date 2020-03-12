@@ -24,9 +24,23 @@ alias find="fd"
 export HISTCONTROL=ignoredups
 shopt -s autocd
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")" 2>&1 >/dev/null
+fi
+
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ ~ \1/'
 }
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
+
+# aws completion
+[ -f /usr/bin/aws_completer ] && complete -C '/usr/bin/aws_completer' aws || true
