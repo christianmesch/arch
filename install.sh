@@ -14,6 +14,8 @@ _install_root=/tmp/install-root
 _install_dir=$_install_root/arch
 _install_config=$_install_dir/configs
 _accent_color=388E3C
+_background_color=0c0c0c
+_foreground_color=d0d0d0
 _error_file=/tmp/installation-error.log
 _bold=$(tput bold)
 _normal=$(tput sgr0)
@@ -47,6 +49,9 @@ pacman -Syy
 # Load install functions
 . ./functions.sh
 
+# Colors
+readColorsFromXresources
+
 # Pre
 setTimeAndLocale
 setHostname
@@ -59,6 +64,7 @@ installNpm
 # Utilities
 installNetworkUtils
 installGraphics
+installPicom
 installTerminator
 installCLI
 installOpenssh

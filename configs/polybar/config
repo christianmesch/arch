@@ -18,11 +18,11 @@
 
 [colors]
 background = ${xrdb:background:#0c0c0c}
-background-alt = ${xrdb:color0:#222222}
+background-alt = ${xrdb:backgroundLight:#222222}
 foreground = ${xrdb:foreground:#d0d0d0}
-foreground-focus = ${xrdb:color2:#388e3c}
+foreground-focus = ${xrdb:accentColor:#388e3c}
 foreground-alt = ${xrdb:color8:#555555}
-primary = ${xrdb:color2:#388e3c}
+primary = ${xrdb:accentColor:#388e3c}
 alert = ${xrdb:color3:#d98600}
 label-focused-padding = 2
 
@@ -30,7 +30,7 @@ label-focused-padding = 2
 width = 100%
 height = 27
 modules-left = i3
-modules-right = bluetooth pulseaudio backlight wlan eth battery date powermenu
+modules-right = bluetooth pulseaudio backlight vpn wlan eth battery date powermenu
 radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -52,6 +52,21 @@ monitor = ${env:MONITOR:}
 
 tray-position = ${env:TRAY:right}
 tray-padding = 2
+
+[module/vpn]
+type = custom/script
+
+exec = nmcli con | awk '/vpn/ {print ($3 == "vpn" && $4 != "--") ? $1 : ""}'
+interval = 2
+tail = false
+
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 0
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/bluetooth]
 type = custom/script
@@ -207,7 +222,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = " %Y-%m-%d"
+date = " %a, %b %d"
 date-alt = " %Y-%m-%d"
 
 time = %H:%M

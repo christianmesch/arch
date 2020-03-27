@@ -64,6 +64,11 @@ function installGraphics {
         "pacman -S xf86-video-nouveau --noconfirm --needed"
 }
 
+function installPicom {
+    run "Installing picom" \
+        "pacman -S picom --noconfirm --needed"
+}
+
 function copyWallpapers {
     run "Copying wallpapers" \
         "mkdir -p $_home/Pictures/wallpapers" \
@@ -78,6 +83,16 @@ function installLightdm {
     run "Configuring LightDM" \
         "yay -S lightdm-mini-greeter --noconfirm" \
         "cp -r $_install_config/lightdm/* /etc/lightdm/"
+
+    echo "${_bold}Making sure that LightDM has got the correct user$_normal"
+
+    _ldm_greeter_conf=/etc/lightdm/lightdm-mini-greeter.conf
+
+    # User
+    _ldm_user=`awk '/user =/ {print $3}' $_ldm_greeter_conf`
+    if [[ $_ldm_user != $_user ]]; then
+        sed -i "s/$_ldm_user/$_user/g" $_ldm_greeter_conf
+    fi
 }
 
 function installI3 {
@@ -126,7 +141,7 @@ function installGTKTheme {
 
     echo "${_bold}Addig my colors to materia theme$_normal"
 
-    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=0c0c0c\nFG=eeeeee\nHDR_BG=0c0c0c\nHDR_FG=e0e0e0\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n") 1>/dev/null
+    ./change_color.sh -o materia-dark-compact-custom <(echo -e "ROUNDNESS=0\nBG=$_background_color\nFG=eeeeee\nHDR_BG=$_background_color\nHDR_FG=$_foreground_color\nSEL_BG=$_accent_color\nMATERIA_VIEW=303030\nMATERIA_SURFACE=424242\nMATERIA_STYLE_COMPACT=True\n") 1>/dev/null
 
     run "Move generated theme to user folder" \
         "mv /root/.themes/ $_home"
@@ -297,6 +312,12 @@ function installGrub {
 
     run "Configuring grub" \
         "grub-mkconfig -o /boot/grub/grub.cfg"
+}
+
+function readColorsFromXresources {
+    _accent_color=`awk -F '#' '/accentColor/ {print $2}' $_install_config/misc/.Xresources`
+    _background_color=`awk -F '#' '/background/ {print $2}' $_install_config/misc/.Xresources`
+    _foreground_color=`awk -F '#' '/foreground/ {print $2}' $_install_config/misc/.Xresources`
 }
 
 function removeInstallationFolder {

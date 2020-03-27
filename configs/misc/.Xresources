@@ -9,7 +9,9 @@ Xft.dpi:       120
 ! special
 *.foreground:   #d0d0d0
 *.background:   #0c0c0c
+*.backgroundLight: #222222
 *.cursorColor:  #d0d0d0
+*.accentColor:  #388e3c
 
 ! black
 *.color0:       #222222
