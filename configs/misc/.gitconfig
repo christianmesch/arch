@@ -8,7 +8,7 @@
 	co = checkout
 	br = branch
 	cm = commit
-	ac = !git add -A :/ && git commit -m
+	ac = !git add -A :/ && git commit
 	update = !git pull && git submodule update --init --recursive
 	sco = submodule foreach --recursive git checkout
 	spull = submodule foreach --recursive git pull
