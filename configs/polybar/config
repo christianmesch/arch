@@ -30,7 +30,7 @@ label-focused-padding = 2
 width = 100%
 height = 27
 modules-left = i3
-modules-right = bluetooth pulseaudio backlight vpn wlan eth battery date powermenu
+modules-right = bluetooth pulseaudio backlight wttr vpn wlan eth battery date powermenu
 radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -42,10 +42,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = FiraCode:pixelsize=10;1
-font-1 = dina:pixelsize=9;1
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0"
-font-3 = "Font Awesome 5 Brands:style=Solid:pixelsize=10;0"
+font-0 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0"
+font-1 = "Font Awesome 5 Brands:style=Solid:pixelsize=10;0"
+font-2 = Symbols Nerd Font:style=2048-em:pixelsize=10;1
+font-3 = dina:pixelsize=9;1
 font-4 = unifont:size=6;1
 
 monitor = ${env:MONITOR:}
@@ -67,6 +67,19 @@ format-padding = 0
 label = %output%
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
+
+[module/wttr]
+type = custom/script
+
+exec = ~/.custom-scripts/polybar-wttr.sh
+interval = 600
+tail = false
+
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 0
+
+label = %output%
 
 [module/bluetooth]
 type = custom/script
@@ -104,12 +117,13 @@ label-unmounted-foreground = ${colors.foreground-alt}
 ws-icon-0 = 1 terminal;
 ws-icon-1 = 2 web;龜
 ws-icon-2 = 3 code;
-ws-icon-3 = 4 social;
-ws-icon-4 = 5 misc;
+ws-icon-3 = 4 code;
+ws-icon-4 = 5 code;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
 ws-icon-8 = 9 music;
+ws-icon-9 = 10 social;
 ws-icon-default = 
 
 type = internal/i3

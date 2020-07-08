@@ -96,8 +96,8 @@ function installLightdm {
 }
 
 function installI3 {
-    run "Installing i3 and feh" \
-        "pacman -S i3 feh --noconfirm --needed"
+    run "Installing i3-gaps and feh" \
+        "pacman -S i3-gaps feh --noconfirm --needed"
 
     run "Configuring i3" \
         "mkdir -p $_home_config/i3" \
@@ -108,7 +108,7 @@ function installPolybar {
     run "Installing Polybar" \
         "yay -S polybar-git --noconfirm" \
         "install -Dm644 /usr/share/doc/polybar/config $_home_config/polybar/config" \
-        "pacman -S ttf-font-awesome --noconfirm --needed"
+        "pacman -S ttf-font-awesome ttf-nerd-fonts-symbols --noconfirm --needed"
 
     run "Configuring Polybar" \
         "cp -r $_install_config/polybar/* $_home_config/polybar/"

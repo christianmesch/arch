@@ -12,14 +12,24 @@ alias lal="ls -al --color=auto"
 alias fpacman="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fyay="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 
-PS1='[\u@\h \W$(parse_git_branch)] λ '
+PS1='\[\e[31m\]$(last_command)\[\e[39m\]\[\e[33m\]\w\[\e[39m\]\[\e[36m\]$(parse_git_branch)\[\e[39m\] \[\e[32m\]λ \[\e[39m\]'
+
+parse_git_branch() {
+	local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    if ! [ -z "$branch" ]; then
+        echo " ($branch)"
+    fi
+}
+
+last_command() {
+    if [[ $? -ne 0 ]]; then echo '> '; fi
+}
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-alias diff="diff-so-fancy"
+#alias diff="diff-so-fancy"
 alias cat="bat"
-alias find="fd"
 
 export HISTCONTROL=ignoredups
 shopt -s autocd
@@ -37,10 +47,6 @@ source /usr/share/fzf/completion.bash
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
-
-parse_git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ ~ \1/'
-}
 
 # tabtab source for packages
 # uninstall by removing these lines

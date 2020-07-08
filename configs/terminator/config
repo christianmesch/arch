@@ -1,9 +1,19 @@
 [global_config]
-  title_inactive_bg_color = "#555555"
-  title_inactive_fg_color = "#d0d0d0"
-  title_transmit_bg_color = "#222222"
   title_transmit_fg_color = "#d0d0d0"
+  title_transmit_bg_color = "#222222"
+  title_inactive_fg_color = "#d0d0d0"
+  title_inactive_bg_color = "#555555"
 [keybindings]
+[profiles]
+  [[default]]
+    background_color = "#0c0c0c"
+    cursor_color = "#d0d0d0"
+    foreground_color = "#d0d0d0"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    palette = "#222222:#a54242:#388e3c:#d98600:#5f819d:#85678f:#5e8d87:#707880:#555555:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#d0d0d0"
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[child1]]]
@@ -14,13 +24,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    background_color = "#0c0c0c"
-    copy_on_selection = True
-    cursor_color = "#d0d0d0"
-    foreground_color = "#d0d0d0"
-    palette = "#222222:#a54242:#388e3c:#d98600:#5f819d:#85678f:#5e8d87:#707880:#555555:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#d0d0d0"
-    scrollback_infinite = True
-    scrollbar_position = hidden
-    show_titlebar = False

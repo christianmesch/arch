@@ -8,10 +8,15 @@
 	co = checkout
 	br = branch
 	cm = commit
+	cp = cherry-pick
 	ac = !git add -A :/ && git commit
 	update = !git pull && git submodule update --init --recursive
 	sco = submodule foreach --recursive git checkout
 	spull = submodule foreach --recursive git pull
 	ssts = submodule foreach --recursive git status -s
+	sst = submodule foreach --recursive git status
+	sbr = submodule foreach --recursive git branch
+	spush = submodule foreach --recursive git push
+	sac = submodule foreach --recursive git ac
 [include]
 	path = ~/.gitconfig-custom

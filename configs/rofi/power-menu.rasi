@@ -2,6 +2,7 @@
 * {
     background-color: @background;
     text-color: @foreground;
+    font: "mono 15";
 }
 
 #window {

@@ -13,13 +13,13 @@ options="$screen\n$area\n$window"
 chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 1)"
 case $chosen in
     $screen)
-        sleep 1; scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/scrot/'
+        sleep 1; cd ~/Pictures/scrot/; scrot '%Y-%m-%d_$wx$h_scrot.png'
         ;;
     $area)
-        scrot -s '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/scrot/'
+        sleep 0.2; cd ~/Pictures/scrot/; scrot -s '%Y-%m-%d_$wx$h_scrot.png'
         ;;
     $window)
-        sleep 1; scrot -u '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/scrot/'
+        sleep 1; cd ~/Pictures/scrot/; scrot -u '%Y-%m-%d_$wx$h_scrot.png'
         ;;
 esac
 
