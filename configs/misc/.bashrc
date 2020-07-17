@@ -12,7 +12,7 @@ alias lal="ls -al --color=auto"
 alias fpacman="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fyay="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 
-PS1='\[\e[31m\]$(last_command)\[\e[39m\]\[\e[33m\]\w\[\e[39m\]\[\e[36m\]$(parse_git_branch)\[\e[39m\] \[\e[32m\]λ \[\e[39m\]'
+PS1='\[\033[38;5;1m\]$(last_command)\[$(tput sgr0)\]\[\033[38;5;3m\]\w\[$(tput sgr0)\]\[\033[38;5;6m\]$(parse_git_branch)\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;2m\]λ\[$(tput sgr0)\] \[$(tput sgr0)\]'
 
 parse_git_branch() {
 	local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
