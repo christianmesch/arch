@@ -200,7 +200,7 @@ function installSlack {
     run "Installing Slack" \
         "yay -S --noconfirm slack-desktop"
 }
-export ZSH="/home/mesch/.oh-my-zsh"
+
 function installZsh {
     run "Installing zsh and oh-my-zsh" \
         "pacman -S zsh --noconfirm --needed" \
