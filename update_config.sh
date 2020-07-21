@@ -5,7 +5,7 @@ cp ~/.config/i3/* $SCRIPTPATH/configs/i3/
 cp ~/.config/polybar/* $SCRIPTPATH/configs/polybar/
 cp /etc/lightdm/* $SCRIPTPATH/configs/lightdm/
 cp ~/Pictures/wallpapers/* $SCRIPTPATH/configs/wallpaper/
-cp ~/.bashrc $SCRIPTPATH/configs/misc/
+cp ~/.zshrc $SCRIPTPATH/configs/misc/
 cp ~/.gitconfig $SCRIPTPATH/configs/misc/
 cp ~/.Xkbmap $SCRIPTPATH/configs/misc/
 cp ~/.Xresources $SCRIPTPATH/configs/misc/

@@ -66,6 +66,7 @@ installNetworkUtils
 installGraphics
 installPicom
 installTerminator
+installZsh
 installCLI
 installOpenssh
 installScrot

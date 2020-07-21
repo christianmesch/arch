@@ -21,7 +21,13 @@ mount /dev/sda4 /mnt/home
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
-wifi-menu
+# Connect to internet
+iwctl
+
+device list
+station <device> scan
+station <device> get-networks
+station <device> connect <SSID>
 
 pacstrap /mnt base base-devel linux linux-firmware vim git
 genfstab -U /mnt >> /mnt/etc/fstab

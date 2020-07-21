@@ -200,6 +200,18 @@ function installSlack {
     run "Installing Slack" \
         "yay -S --noconfirm slack-desktop"
 }
+export ZSH="/home/mesch/.oh-my-zsh"
+function installZsh {
+    run "Installing zsh and oh-my-zsh" \
+        "pacman -S zsh --noconfirm --needed" \
+        "runuser -u ${_user} -- sh -c '$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)' '' --unattended"
+
+    run "Copying .zshrc" \
+        "cp $_install_config/misc/.zshrc $_home"
+
+    echo "${_bold}Making sure that .zshrc has got the correct user$_normal"
+    sed -i "s/mesch/$_user/g" "$_home/.zshrc"
+}
 
 function installTerminator {
     run "Installing Terminator" \
@@ -218,9 +230,6 @@ function installCLI {
         "pacman -S ripgrep --noconfirm --needed" \
         "pacman -S fd --noconfirm --needed" \
         "pacman -S fzf --noconfirm --needed"
-
-    run "Copying .bashrc" \
-        "cp $_install_config/misc/.bashrc $_home"
 
     run "Copying .gitconfig" \
         "cp $_install_config/misc/.gitconfig $_home"
