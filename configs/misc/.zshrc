@@ -62,7 +62,7 @@ export ZSH="/home/mesch/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast docker aws fzf ssh-agent sudo)
+plugins=(gitfast docker aws fzf ssh-agent sudo zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,12 +95,21 @@ alias lal="ls -al --color=auto"
 alias fpacman="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fyay="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 
+parse_git_dirty() {
+  [[ -n "$(git status -s 2> /dev/null)" ]] && echo "*"
+}
+
 parse_git_branch() {
 	local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
     if ! [ -z "$branch" ]; then
-        echo " ($branch)"
+        echo " ($branch$(parse_git_dirty))"
     fi
 }
 
 # Prompt
 PROMPT='%F{yellow}%~%F{cyan}$(parse_git_branch)%f %(?.%F{green}.%F{red})λ%f '
+PROMPT2='> '
+
+# History
+unsetopt sharehistory
+setopt incappendhistorytime

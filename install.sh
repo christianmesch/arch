@@ -91,6 +91,8 @@ installRofi
 installIDEs
 installOpenJDK
 installDocker
+installYarn
+installTypescript
 
 # Internet
 installFirefox

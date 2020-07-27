@@ -16,7 +16,7 @@ case $chosen in
         sleep 1; cd ~/Pictures/scrot/; scrot '%Y-%m-%d_$wx$h_scrot.png'
         ;;
     $area)
-        sleep 0.2; cd ~/Pictures/scrot/; scrot -s '%Y-%m-%d_$wx$h_scrot.png'
+        sleep 0.5; cd ~/Pictures/scrot/; scrot -s '%Y-%m-%d_$wx$h_scrot.png'
         ;;
     $window)
         sleep 1; cd ~/Pictures/scrot/; scrot -u '%Y-%m-%d_$wx$h_scrot.png'

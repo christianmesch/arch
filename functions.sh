@@ -178,6 +178,16 @@ function installOpenJDK {
         "pacman -S jdk-openjdk --noconfirm --needed"
 }
 
+function installYarn {
+    run "Installing yarn" \
+        "runuser -u ${_user} -- sudo npm install -g yarn"
+}
+
+function installTypescript {
+    run "Installing Typescript" \
+        "pacman -S typescript --noconfirm --needed"
+}
+
 function installDocker {
     run "Installing Docker and Docker Compose" \
         "pacman -S docker --noconfirm --needed" \
@@ -205,6 +215,12 @@ function installZsh {
     run "Installing zsh and oh-my-zsh" \
         "pacman -S zsh --noconfirm --needed" \
         "runuser -u ${_user} -- sh -c '$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)' '' --unattended"
+
+    run "Cloning zsh-autosuggestions" \
+        "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$_home/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+
+    run "Cloning zsh-syntax-highlighting" \
+        "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$_home/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
     run "Copying .zshrc" \
         "cp $_install_config/misc/.zshrc $_home"

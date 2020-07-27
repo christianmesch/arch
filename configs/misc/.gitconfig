@@ -20,3 +20,5 @@
 	sac = submodule foreach --recursive git ac
 [include]
 	path = ~/.gitconfig-custom
+[pull]
+	rebase = false
