@@ -7,7 +7,7 @@ function run {
     echo "$_bold$1$_normal"
     for var in "${@:2}"; do
         IFS=' ' read -ra cmd <<< "$var"
-        if [[ ${cmd[0]} == "yay" ]]; then
+        if [[ ${cmd[0]} == "paru" ]]; then
             _command="runuser -u $_user -- ${cmd[@]}"
         else
             _command="${cmd[@]}"
@@ -27,22 +27,27 @@ $_error
     done
 }
 
-function installYay {    
+function installParu {    
     cd $_install_root
     
-    run "Cloning yay repo" \
-        "git clone --depth 1 https://aur.archlinux.org/yay.git" \
-        "chmod -R 777 yay"
+    run "Cloning paru repo" \
+        "git clone --depth 1 https://aur.archlinux.org/paru.git" \
+        "chmod -R 777 paru"
 
-    cd yay
+    cd paru
 
-    run "Installing yay" \
+    run "Installing paru" \
         "runuser -u $_user -- makepkg -si --noconfirm --needed"
 }
 
 function installNpm {
     run "Installing npm" \
         "pacman -S npm --noconfirm --needed"
+}
+
+function installNvm {
+    run "Installing nvm" \
+        "paru -S nvm --noconfirm"
 }
 
 function installNetworkUtils {
@@ -81,7 +86,7 @@ function installLightdm {
         "systemctl enable lightdm.service"
 
     run "Configuring LightDM" \
-        "yay -S lightdm-mini-greeter --noconfirm" \
+        "paru -S lightdm-mini-greeter --noconfirm" \
         "cp -r $_install_config/lightdm/* /etc/lightdm/"
 
     echo "${_bold}Making sure that LightDM has got the correct user$_normal"
@@ -106,7 +111,7 @@ function installI3 {
 
 function installPolybar {
     run "Installing Polybar" \
-        "yay -S polybar-git --noconfirm" \
+        "paru -S polybar-git --noconfirm" \
         "install -Dm644 /usr/share/doc/polybar/config $_home_config/polybar/config" \
         "pacman -S ttf-font-awesome ttf-nerd-fonts-symbols --noconfirm --needed"
 
@@ -119,7 +124,7 @@ function installBetterLockscreen {
         "pacman -Rs i3lock --noconfirm"
 
     run "Installing BetterLockscreen" \
-        "yay -S --noconfirm betterlockscreen"
+        "paru -S --noconfirm betterlockscreen"
 
     run "Configuring BetterLockscreen" \
         "cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $_home_config"
@@ -163,10 +168,10 @@ function installRofi {
 
 function installIDEs {
     run "Installing Visual Studio Code" \
-        "yay -S --noconfirm visual-studio-code-bin"
+        "paru -S --noconfirm visual-studio-code-bin"
 
     run "Installing Jetbrains Toolbox" \
-        "yay -S --noconfirm jetbrains-toolbox"
+        "paru -S --noconfirm jetbrains-toolbox"
 
     run "Creating workspace" \
         "mkdir $_home/dev" \
@@ -208,7 +213,7 @@ function installFirefox {
 
 function installSlack {
     run "Installing Slack" \
-        "yay -S --noconfirm slack-desktop"
+        "paru -S --noconfirm slack-desktop"
 }
 
 function installZsh {
@@ -223,32 +228,50 @@ function installZsh {
         "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$_home/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
     run "Copying .zshrc" \
-        "cp $_install_config/misc/.zshrc $_home"
+        "cp $_install_config/misc/.zshrc $_home" \
+        "cp $_install_config/misc/.zshenv $_home"
 
     echo "${_bold}Making sure that .zshrc has got the correct user$_normal"
     sed -i "s/mesch/$_user/g" "$_home/.zshrc"
 }
 
-function installTerminator {
-    run "Installing Terminator" \
-        "pacman -S terminator --noconfirm --needed"
+function installAlacritty {
+    run "Installing Alacritty" \
+        "pacman -S alacritty --noconfirm --needed"
 
-    run "Configuring Terminator" \
-        "cp -r $_install_config/terminator $_home_config/"
+    run "Configuring Alacritty" \
+        "cp -r $_install_config/alacritty $_home_config/"
 
 }
 
 function installCLI {
     run "Installing various CLIs" \
-        "runuser -u ${_user} -- sudo npm install -g tldr" \
+        "paru -S tealdeer --noconfirm" \
         "pacman -S diff-so-fancy --noconfirm --needed" \
         "pacman -S bat --noconfirm --needed" \
         "pacman -S ripgrep --noconfirm --needed" \
         "pacman -S fd --noconfirm --needed" \
-        "pacman -S fzf --noconfirm --needed"
+        "pacman -S fzf --noconfirm --needed" \
+        "pacman -S exa --noconfirm --needed"
 
     run "Copying .gitconfig" \
         "cp $_install_config/misc/.gitconfig $_home"
+}
+
+function installTmux {
+    run "Installing tmux" \
+        "pacman -S tmux --noconfirm --needed"
+
+    run "Configuring tmux" \
+        "cp $_install_config/misc/.tmux.config $_home"
+
+    run "Installing tmuxinator" \
+        "paru -S tmuxinator --noconfirm"
+}
+
+function installPowerline {
+    run "Installing powerline" \
+        "pacman -S powerline powerline-fonts --noconfirm --needed"
 }
 
 function installOpenssh {
@@ -256,9 +279,9 @@ function installOpenssh {
         "pacman -S openssh --noconfirm --needed"
 }
 
-function installScrot {
-    run "Installing scrot" \
-        "pacman -S scrot --noconfirm --needed"
+function installMaim {
+    run "Installing maim" \
+        "pacman -S maim --noconfirm --needed"
 
     run "Creating folder for screenshots" \
         "mkdir -p $_home/Pictures/scrot"
@@ -287,7 +310,7 @@ function installDunst {
 
 function installLogitechUR {
     run "Installing ltunify" \
-        "yay -S ltunify-git --noconfirm"
+        "paru -S ltunify-git --noconfirm"
 
     run "Creating plugdev group and adding user" \
         "groupadd -f plugdev" \

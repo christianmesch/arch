@@ -100,7 +100,7 @@ monitor = 0
 #
 # If this option is set to mouse or keyboard, the monitor option
 # will be ignored.
-follow = none
+follow = keyboard
 
 # Should a notification popped up from history be sticky or timeout
 # as if it would normally do.
@@ -154,7 +154,7 @@ max_icon_size = 80
 # Paths to default icons.
 icon_path = /usr/share/icons/Adwaita/16x16/mimetypes/:/usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/48x48/notifications/:/usr/share/icons/Adwaita/48x48/emblems/
 
-frame_width = 3
+frame_width = 1
 frame_color = "#0c0c0c"
 
 [shortcuts]
@@ -179,19 +179,19 @@ context = ctrl+shift+period
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-frame_color = "#388E3C"
+frame_color = "#222222"
 foreground = "#d0d0d0"
 background = "#0c0c0c"
 timeout = 4
 
 [urgency_normal]
-frame_color = "#388E3C"
+frame_color = "#222222"
 foreground = "#d0d0d0"
 background = "#0c0c0c"
 timeout = 6
 
 [urgency_critical]
-frame_color = "#d98600"
+frame_color = "#222222"
 foreground = "#d0d0d0"
 background = "#0c0c0c"
 timeout = 8

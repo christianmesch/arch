@@ -88,12 +88,13 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-alias ls='ls --color=auto'
-alias ll="ls -l --color=auto"
-alias lal="ls -al --color=auto"
+alias ls='exa --color=auto --group-directories-first'
+alias ll="exa -l --color=auto --group-directories-first"
+alias lal="exa -al --color=auto --group-directories-first"
 
 alias fpacman="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fyay="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
+alias fparu="paru -Slq | fzf -m --preview 'paru -Si {1}'| xargs -ro paru -S"
 
 parse_git_dirty() {
   [[ -n "$(git status -s 2> /dev/null)" ]] && echo "*"
@@ -106,10 +107,55 @@ parse_git_branch() {
     fi
 }
 
+_fzf_complete_aws-vault() {
+  _fzf_complete --prompt="profile> " -- "$@" < <(
+    aws-vault list --profiles | sort | uniq
+  )
+}
+
+# tmux stuff
+tm() {
+  if [ $# -lt 1 ]; then
+    echo "No arguments provided. Usage:\ntm <session name>"
+    return 1
+  fi
+
+  if tmux has-session -t $1; then
+    tmux attach -t $1
+  elif tmuxinator l | grep -qE "^$1$"; then
+    echo "Starting tmuxinator project $1"
+    tmuxinator s $1
+  else
+    echo "Creating new session $1"
+    tmux new -s $1
+  fi
+}
+
+_fzf_complete_tm() {
+  _fzf_complete --prompt="sessions> " -- "$@" < <(
+    TM_SESSIONS=`tmux ls | awk -F':' '{print $1}'`
+    TMUXINATOR_PROFILES=`tmuxinator l | sed '1d'`
+    echo "$TM_SESSIONS\n$TMUXINATOR_PROFILES" | sort | uniq
+  )
+}
+
+if [ ! "$TMUX" = "" ]; then export TERM=tmux-256color; fi
+
 # Prompt
 PROMPT='%F{yellow}%~%F{cyan}$(parse_git_branch)%f %(?.%F{green}.%F{red})λ%f '
 PROMPT2='> '
 
+export EDITOR='vim'
+
 # History
 unsetopt sharehistory
 setopt incappendhistorytime
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# Source
+source /usr/share/nvm/init-nvm.sh
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

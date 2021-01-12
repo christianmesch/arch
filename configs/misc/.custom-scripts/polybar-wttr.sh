@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-current=`curl -s wttr.in/Kista?format=1`
+current=`curl -s wttr.in/Sundsvall?format=1`
 emoji=`echo $current | cut -d ' ' -f1`
 temp=`echo $current | cut -d ' ' -f2-`
 

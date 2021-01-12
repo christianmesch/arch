@@ -49,7 +49,7 @@ bindsym XF86MonBrightnessDown exec light -U 5 # Decrease Brightness
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -167,7 +167,7 @@ focus_follows_mouse no
 # Startup
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-exec --no-startup-id picom -b
+exec --no-startup-id picom -CGb --config /dev/null
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/cristofer-jeschke-VIqCeAwQ1rU-unsplash.jpg
 exec --no-startup-id ~/.custom-scripts/betterlockscreen.sh
 

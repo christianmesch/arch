@@ -58,18 +58,20 @@ setHostname
 installGrub
 
 # Installers
-installYay
+installParu
 installNpm
 
 # Utilities
 installNetworkUtils
 installGraphics
 installPicom
-installTerminator
+installAlacritty
 installZsh
+installTmux
+installPowerline
 installCLI
 installOpenssh
-installScrot
+installMaim
 installBlueberry
 installLight
 installDunst
@@ -91,6 +93,7 @@ installRofi
 installIDEs
 installOpenJDK
 installDocker
+installNvm
 installYarn
 installTypescript
 

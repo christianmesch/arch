@@ -13,13 +13,13 @@ options="$screen\n$area\n$window"
 chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 1)"
 case $chosen in
     $screen)
-        sleep 1; cd ~/Pictures/scrot/; scrot '%Y-%m-%d_$wx$h_scrot.png'
+        sleep 0.5 && maim -u ~/Pictures/scrot/$(date +"%F_%T.%N")_scrot.png && notify-send Screenshot "Screenshot captured!"
         ;;
     $area)
-        sleep 0.5; cd ~/Pictures/scrot/; scrot -s '%Y-%m-%d_$wx$h_scrot.png'
+        maim -su ~/Pictures/scrot/$(date +"%F_%T.%N")_scrot.png && notify-send Screenshot "Screenshot captured!"
         ;;
     $window)
-        sleep 1; cd ~/Pictures/scrot/; scrot -u '%Y-%m-%d_$wx$h_scrot.png'
+        maim -su ~/Pictures/scrot/$(date +"%F_%T.%N")_scrot.png && notify-send Screenshot "Screenshot captured!"
         ;;
 esac
 
