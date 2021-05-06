@@ -107,6 +107,23 @@ parse_git_branch() {
     fi
 }
 
+# aws-vault stuff
+# Borrowed from https://github.com/mozilla/multi-account-containers/issues/365#issuecomment-527122371
+awslogin() {
+  FIREFOX="firefox"
+  LOGIN_URL=$(aws-vault login --stdout "${1}")
+  [[ $? != 0 ]] && echo "${LOGIN_URL}" && return
+  ENCODED_URL="${LOGIN_URL//&/%26}"
+  URI_HANDLER="ext+container:name=${1}&url=${ENCODED_URL}"
+  "${FIREFOX}" "${URI_HANDLER}"
+}
+
+_fzf_complete_awslogin() {
+  _fzf_complete --prompt="profile> " -- "$@" < <(
+    aws-vault list --profiles | sort | uniq
+  )
+}
+
 _fzf_complete_aws-vault() {
   _fzf_complete --prompt="profile> " -- "$@" < <(
     aws-vault list --profiles | sort | uniq
