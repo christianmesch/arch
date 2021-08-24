@@ -93,9 +93,14 @@ alias ll="exa -l --color=auto --group-directories-first"
 alias lal="exa -al --color=auto --group-directories-first"
 
 alias fpacman="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias fyay="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 alias fparu="paru -Slq | fzf -m --preview 'paru -Si {1}'| xargs -ro paru -S"
 
+alias ftldr="tldr -l | fzf --preview 'tldr --color always {1}' | xargs tldr"
+
+# private
+. ~/.zshrc-private
+
+# git
 parse_git_dirty() {
   [[ -n "$(git status -s 2> /dev/null)" ]] && echo "*"
 }
@@ -150,13 +155,26 @@ tm() {
 
 _fzf_complete_tm() {
   _fzf_complete --prompt="sessions> " -- "$@" < <(
-    TM_SESSIONS=`tmux ls | awk -F':' '{print $1}'`
-    TMUXINATOR_PROFILES=`tmuxinator l | sed '1d'`
+    TM_SESSIONS=$(tmux ls | awk -F':' '{print $1}')
+    TMUXINATOR_PROFILES=$(tmuxinator l | sed '1d')
     echo "$TM_SESSIONS\n$TMUXINATOR_PROFILES" | sort | uniq
   )
 }
 
 if [ ! "$TMUX" = "" ]; then export TERM=tmux-256color; fi
+
+# tldr complete
+_fzf_complete_tldr() {
+  _fzf_complete --prompt="commands> " -- "$0" < <(
+    tldr -l
+  )
+}
+
+# ngrok
+ngtunnel() {
+  ngrok authtoken $NGROK_TOKEN
+  ngrok http $1
+}
 
 # Prompt
 PROMPT='%F{yellow}%~%F{cyan}$(parse_git_branch)%f %(?.%F{green}.%F{red})λ%f '
@@ -167,6 +185,7 @@ export EDITOR='vim'
 # History
 unsetopt sharehistory
 setopt incappendhistorytime
+
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
 
@@ -176,3 +195,7 @@ source /usr/share/nvm/init-nvm.sh
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/mesch/.sdkman"
+[[ -s "/home/mesch/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mesch/.sdkman/bin/sdkman-init.sh"

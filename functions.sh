@@ -80,24 +80,13 @@ function copyWallpapers {
         "cp -r $_install_config/wallpaper/* $_home/Pictures/wallpapers"
 }
 
-function installLightdm {
-    run "Installing LightDM" \
-        "pacman -S lightdm --noconfirm --needed" \
-        "systemctl enable lightdm.service"
+function installEmptty {
+    run "Installing Emptty" \
+        "paru -S emptty --noconfirm" \
+        "systemctl enable emptty.service"
 
-    run "Configuring LightDM" \
-        "paru -S lightdm-mini-greeter --noconfirm" \
-        "cp -r $_install_config/lightdm/* /etc/lightdm/"
-
-    echo "${_bold}Making sure that LightDM has got the correct user$_normal"
-
-    _ldm_greeter_conf=/etc/lightdm/lightdm-mini-greeter.conf
-
-    # User
-    _ldm_user=`awk '/user =/ {print $3}' $_ldm_greeter_conf`
-    if [[ $_ldm_user != $_user ]]; then
-        sed -i "s/$_ldm_user/$_user/g" $_ldm_greeter_conf
-    fi
+    run "Configuring Emptty" \
+        "cp -r $_install_config/emptty/* /etc/emptty/"
 }
 
 function installI3 {
@@ -240,8 +229,8 @@ function installAlacritty {
         "pacman -S alacritty --noconfirm --needed"
 
     run "Configuring Alacritty" \
-        "cp -r $_install_config/alacritty $_home_config/"
-
+	"mkdir -p $_home_config/alacritty" \
+        "cp -r $_install_config/alacritty $_home_config/alacritty"
 }
 
 function installCLI {

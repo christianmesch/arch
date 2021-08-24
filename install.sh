@@ -82,7 +82,7 @@ copyWallpapers
 copyCustomScripts
 
 # GUI
-installLightdm
+installEmptty
 installI3
 installPolybar
 installBetterLockscreen

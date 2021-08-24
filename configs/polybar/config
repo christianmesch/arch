@@ -272,7 +272,7 @@ full-at = 98
 format-charging = <animation-charging> <label-charging>
 
 format-discharging = <animation-discharging> <label-discharging>
-label-discharging = %percentage%% %time%
+label-discharging = %percentage%%
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}

@@ -1,0 +1,47 @@
+# TTY, where emptty will start.
+TTY_NUMBER=7
+
+# Enables switching to defined TTY number.
+SWITCH_TTY=true
+
+# Enables printing of /etc/issue in daemon mode.
+PRINT_ISSUE=true
+
+# Preselected user, if AUTOLOGIN is enabled, this user is logged in.
+#DEFAULT_USER=user
+
+# Enables Autologin, if DEFAULT_USER is defined and part of nopasswdlogin group. Possible values are "true" or "false".
+AUTOLOGIN=false
+
+# The default session used, if Autologin is enabled. If session is not found in list of session, it proceeds to manual selection.
+# AUTOLOGIN_SESSION=i3
+
+# Default LANG, if user does not have set own in init script.
+#LANG=en_US.UTF-8
+
+# Starts desktop with calling "dbus-launch".
+DBUS_LAUNCH=true
+
+# Starts Xorg desktop with calling "~/.xinitrc" script, if is true, file exists and selected WM/DE is Xorg session, it overrides DBUS_LAUNCH.
+XINITRC_LAUNCH=true
+
+# Prints available WM/DE each on new line instead of printing on single line.
+VERTICAL_SELECTION=false
+
+# Defines the way, how is logging handled. Possible values are "default", "appending" or "disabled".
+#LOGGING=default
+
+# Arguments passed to Xorg server.
+#XORG_ARGS=
+
+# Overrides path of log file
+#LOGGING_FILE=/var/log/emptty
+
+# Allows to use /etc/emptty/motd-gen.sh script to generate custom MOTD.
+#DYNAMIC_MOTD=false
+
+# Foreground color, available only in daemon mode.
+#FG_COLOR=LIGHT_BLACK
+
+# Background color, available only in daemon mode.
+#BG_COLOR=BLACK
