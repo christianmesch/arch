@@ -7,40 +7,40 @@ Xft.dpi:       120
 ! }}}
 
 ! special
-*.foreground:   #d0d0d0
+*.foreground:   #E8E3E3
 *.background:   #0c0c0c
-*.backgroundLight: #222222
-*.cursorColor:  #d0d0d0
-*.accentColor:  #388e3c
+*.backgroundLight: #353535
+*.cursorColor:  #E8E3E3
+*.accentColor:  #8C977D
 
 ! black
-*.color0:       #222222
-*.color8:       #555555
+*.color0:       #151515
+*.color8:       #353535
 
 ! red
-*.color1:       #a54242
-*.color9:       #cc6666
+*.color1:       #B66467
+*.color9:       #B66467
 
 ! green
-*.color2:       #388e3c
-*.color10:      #b5bd68
+*.color2:       #8C977D
+*.color10:      #8C977D
 
 ! yellow
-*.color3:       #d98600
-*.color11:      #f0c674
+*.color3:       #D9BC8C
+*.color11:      #D9BC8C
 
 ! blue
-*.color4:       #5f819d
-*.color12:      #81a2be
+*.color4:       #8DA3B9
+*.color12:      #8DA3B9
 
 ! magenta
-*.color5:       #85678f
-*.color13:      #b294bb
+*.color5:       #A988B0
+*.color13:      #A988B0
 
 ! cyan
-*.color6:       #5e8d87
-*.color14:      #8abeb7
+*.color6:       #8AA6A2
+*.color14:      #8AA6A2
 
 ! white
-*.color7:       #707880
-*.color15:      #d0d0d0
+*.color7:       #E8E3E3
+*.color15:      #E8E3E3

@@ -7,6 +7,9 @@ SWITCH_TTY=true
 # Enables printing of /etc/issue in daemon mode.
 PRINT_ISSUE=true
 
+# Enables printing of default motd, /etc/emptty/motd or /etc/emptty/motd-gen.sh.
+PRINT_MOTD=true
+
 # Preselected user, if AUTOLOGIN is enabled, this user is logged in.
 #DEFAULT_USER=user
 
@@ -31,11 +34,11 @@ VERTICAL_SELECTION=false
 # Defines the way, how is logging handled. Possible values are "default", "appending" or "disabled".
 #LOGGING=default
 
-# Arguments passed to Xorg server.
-#XORG_ARGS=
-
 # Overrides path of log file
 #LOGGING_FILE=/var/log/emptty
+
+# Arguments passed to Xorg server.
+#XORG_ARGS=
 
 # Allows to use /etc/emptty/motd-gen.sh script to generate custom MOTD.
 #DYNAMIC_MOTD=false
@@ -45,3 +48,16 @@ VERTICAL_SELECTION=false
 
 # Background color, available only in daemon mode.
 #BG_COLOR=BLACK
+
+# Enables numlock in daemon mode. Possible values are "true" or "false".
+#ENABLE_NUMLOCK=false
+
+# Defines the way, how is logging of session errors handled. Possible values are "default", "appending" or "disabled".
+#SESSION_ERROR_LOGGING=disabled
+
+# Overrides path of session errors log file
+#SESSION_ERROR_LOGGING_FILE=/var/log/emptty-session-errors
+
+# If set true, it will not use `.emptty-xauth` file, but the standard `~/.Xauthority` file. This allows to handle xauth issues.
+#DEFAULT_XAUTHORITY=false
+

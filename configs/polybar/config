@@ -17,20 +17,21 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:background:#0c0c0c}
-background-alt = ${xrdb:backgroundLight:#222222}
-foreground = ${xrdb:foreground:#d0d0d0}
-foreground-focus = ${xrdb:accentColor:#388e3c}
+background = ${xrdb:background:#151515}
+#background-alt = ${xrdb:backgroundLight:#353535}
+background-alt = #0c0c0c
+foreground = ${xrdb:foreground:#E8E3E3}
+foreground-focus = ${xrdb:accentColor:#8C977D}
 foreground-alt = ${xrdb:color8:#555555}
-primary = ${xrdb:accentColor:#388e3c}
-alert = ${xrdb:color3:#d98600}
+primary = ${xrdb:accentColor:#8C977D}
+alert = ${xrdb:color3:#D9BC8C}
 label-focused-padding = 2
 
 [bar/poly]
 width = 100%
 height = 27
 modules-left = i3
-modules-right = bluetooth pulseaudio backlight wttr vpn wlan eth battery date powermenu
+modules-right = bluetooth pulseaudio wttr vpn wlan eth battery date powermenu
 radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -45,7 +46,7 @@ module-margin-right = 2
 font-0 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0"
 font-1 = "Font Awesome 5 Brands:style=Solid:pixelsize=10;0"
 font-2 = Symbols Nerd Font:style=2048-em:pixelsize=10;1
-font-3 = dina:pixelsize=9;1
+font-3 = dina:pixelsize=11;1
 font-4 = unifont:size=6;1
 
 monitor = ${env:MONITOR:}
@@ -114,17 +115,17 @@ label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
-ws-icon-0 = 1 terminal;
-ws-icon-1 = 2 web;
-ws-icon-2 = 3 code;
-ws-icon-3 = 4 code;
-ws-icon-4 = 5 code;
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9 music;
-ws-icon-9 = 10 social;
-ws-icon-default = 
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;0
+ws-icon-default = ?
 
 type = internal/i3
 format = <label-state> <label-mode>
@@ -180,7 +181,8 @@ label = %percentage_used%%
 [module/wlan]
 type = internal/network
 ;interface = wlo1
-interface = wlp59s0
+;interface = wlp59s0
+interface = wlp0s20f3
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>

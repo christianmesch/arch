@@ -63,3 +63,8 @@ configuration {
     margin: 0 5 0 0;
     spacing: 0;
 }
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color: inherit;
+}
